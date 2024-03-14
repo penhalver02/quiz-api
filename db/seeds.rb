@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -9,19 +11,26 @@
 #   end
 #
 # create category
-# 
-category_1 = Category.create(name: 'matemática')
-category_2 = Category.create(name: 'geografia')
+#
+category1 = Category.create(name: 'matemática')
+Category.create(name: 'geografia')
 
+question1 = Question.create(description: 'Quanto é 1+1?', category_id: category1.id,
+                            correct_answer: '2')
+question2 = Question.create(description: 'Qual a raiz quadrada de 9?', category_id: category1.id,
+                            correct_answer: '3')
 
-question_1 = Question.create(description: 'Quanto é 1+1?', category_id: category_1.id, correct_answer: '2' )
-question_2 = Question.create(description: 'Qual a raiz quadrada de 9?', category_id: category_1.id, correct_answer: '3' )
+Option.create(label: '5', question_id: question1.id)
+option2 = Option.create(label: '2', question_id: question1.id)
+Option.create(label: '7', question_id: question1.id)
 
-option_1 = Option.create(label: '5', question_id: question_1.id)
-option_2 = Option.create(label: '2', question_id: question_1.id)
-option_3 = Option.create(label: '7', question_id: question_1.id)
+Option.create(label: '3', question_id: question2.id)
+Option.create(label: '5', question_id: question2.id)
+Option.create(label: '9', question_id: question2.id)
 
-user_1 = Player.create(name: 'Lucas')
-round_1 = Round.create(category_id: category_1.id, player_id: user_1.id)
+user1 = Player.create(name: 'Lucas')
+round1 = Round.create(category_id: category1.id, player_id: user1.id)
 
-Answer.create(question_id: question_1.id, option_id: option_2.id, correct: true, round_id: round_1.id)
+Answer.create(question_id: question1.id, option_id: option2.id, correct: true,
+              round_id: round1.id)
+Answer.create(question_id: question2.id, round_id: round1.id)

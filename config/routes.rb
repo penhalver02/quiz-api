@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :categories, only: %i[index]
+  resources :rounds, only: %i[show create] do
+    get 'result', action: 'result'
+    post 'answers', action: 'answers'
+  end
 end

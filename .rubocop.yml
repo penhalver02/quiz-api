@@ -4,6 +4,7 @@ require:
 
 Layout/LineLength:
   Max: 100
+  AllowedPatterns: ['^(\s*#)']
 
 Metrics/MethodLength:
   Max: 15

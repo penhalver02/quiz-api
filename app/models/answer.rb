@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Answer < ApplicationRecord
   belongs_to :question
-  belongs_to :option
+  has_one :option, dependent: :destroy
   belongs_to :round
 end
