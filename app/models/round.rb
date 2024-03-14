@@ -4,6 +4,6 @@ class Round < ApplicationRecord
   belongs_to :category
   belongs_to :player
   has_many :answers, dependent: :destroy
-  has_many :questions, through: :category
+  has_many :questions, through: :answers
   has_many :options, through: :questions
 end

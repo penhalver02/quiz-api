@@ -21,7 +21,8 @@ class RoundSerializer
   private
 
   def questions_list
-    @round.questions.map do |question|
+    @round.answers.map do |answer|
+      question = answer.question
       { id: question.id, description: question.description }.merge(options: options_list(question))
     end
   end
