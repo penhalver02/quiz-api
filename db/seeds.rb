@@ -32,7 +32,7 @@ question3 = Question.create(description: 'Qual é 2+2', category_id: category1.i
                             correct_answer: '4')
 
 Option.create(label: '8', question_id: question3.id)
-Option.create(label: '3', question_id: question3.id)
+Option.create(label: '4', question_id: question3.id)
 Option.create(label: '11', question_id: question3.id)
 
 question4 = Question.create(description: 'Qual a raiz quadrada de 4?', category_id: category1.id,

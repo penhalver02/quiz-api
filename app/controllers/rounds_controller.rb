@@ -12,7 +12,7 @@ class RoundsController < ApplicationController
   end
 
   def result
-    round = Round.find(params[:round_id])
+    round = Round.includes(:player, category: [questions: [:options]]).find(params[:round_id])
     render json: ResultSerializer.new(round).attributes
   end
 
