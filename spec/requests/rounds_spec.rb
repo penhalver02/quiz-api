@@ -82,7 +82,7 @@ RSpec.describe "Rounds", type: :request do
     end
 
     let(:round) { Round.last }
-    let(:player) { Round.last }
+    let(:player) { Player.last }
     let(:expected_response) do
       {
         round: {
@@ -110,6 +110,22 @@ RSpec.describe "Rounds", type: :request do
     it 'creates a round' do
       expect(response.body).to eq expected_response
       expect(response.status).to eq 201
+    end
+
+    context 'when category_id is invalid' do
+      let(:params) do
+        {
+          round: {
+            player_name: 'Lucas',
+            category_id: -1
+          }
+        }
+      end
+      let(:expected_response) do
+        { errors: 'Validation failed: Category must exist' }.as_json
+      end
+
+      it { expect(JSON.parse(response.body)).to include(expected_response) }
     end
   end
 
@@ -152,6 +168,15 @@ RSpec.describe "Rounds", type: :request do
 
     it 'returns the round result' do
       expect(response.body).to eq expected_response
+    end
+
+    context 'when round_id does not exist' do
+      let(:round) { instance_double('Round', id: -1) }
+      let(:expected_response) do
+        { errors: "Couldn't find Round with 'id'=-1" }.as_json
+      end
+
+      it { expect(JSON.parse(response.body)).to include(expected_response) }
     end
   end
 
