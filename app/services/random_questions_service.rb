@@ -16,6 +16,8 @@ class RandomQuestionsService
   private
 
   def list_questions_ids
+    # Buscar outra alternativa para não voltar todas as questões podendo gerar problema de desempenho,
+    # tentar buscar as questões sorteadas utilizando sql
     Question.where(category_id: @category_id).select(:id)
   end
 end
