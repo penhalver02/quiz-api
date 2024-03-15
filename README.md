@@ -3,6 +3,11 @@ Realizando o build da imagem.
 ```
 docker-compose build
 ```
+Criando o arquivo .env
+```
+cp .env.example .env
+```
+
 Realizar o setup da aplicação.
 ```
 docker-compose run --rm app bin/setup
