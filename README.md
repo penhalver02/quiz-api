@@ -59,3 +59,8 @@ curl -XPOST -H "Content-type: application/json" -d "{\"answer\":{\"question_id\"
 ```
 docker-compose run --rm -e RAILS_ENV=test app rspec
 ```
+Diagrama de entidade e relacionamento
+![image](https://github.com/penhalver02/quiz-api/assets/55254573/2746c03b-b3de-4326-9341-782992cc59ef)
+
+
+
