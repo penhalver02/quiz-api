@@ -12,29 +12,31 @@ module RoundService
     end
 
     def call
-      player = create_player
-      round = create_round(player)
-      create_answers(round)
-      round
+      ActiveRecord::Base.transaction do
+        create_player
+        create_round
+        create_answers
+      end
+      create_round
     end
 
     private
 
     def create_player
-      Player.create!(name: @player_name)
+      @create_player ||= Player.create!(name: @player_name)
     end
 
-    def create_round(player)
-      Round.create!(category_id: @category_id, player_id: player.id)
+    def create_round
+      @crate_round ||= Round.create!(category_id: @category_id, player_id: create_player.id)
     end
 
     def random_questions_ids
       RandomQuestionsService.call(@category_id)
     end
 
-    def create_answers(round)
+    def create_answers
       random_questions_ids.each do |random_question_id|
-        Answer.create!(question_id: random_question_id.id, round_id: round.id)
+        Answer.create!(question_id: random_question_id.id, round_id: create_round.id)
       end
     end
   end
