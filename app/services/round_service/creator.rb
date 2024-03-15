@@ -27,7 +27,7 @@ module RoundService
     end
 
     def create_round
-      @crate_round ||= Round.create!(category_id: @category_id, player_id: create_player.id)
+      @create_round ||= Round.create!(category_id: @category_id, player_id: create_player.id)
     end
 
     def random_questions_ids
